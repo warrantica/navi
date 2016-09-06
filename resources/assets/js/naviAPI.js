@@ -1,6 +1,7 @@
 export default {
   getNav(name){
     return new Promise((resolve, reject) => {
+      if(!name) reject('Name must not be empty');
       $.ajax({
         type: 'GET',
         url: '/api/fund/' + name,

@@ -14,9 +14,12 @@
 </head>
 <body>
   <div class="sidebar">
-    Navi
+    <div class="sidebar-logo">Navi</div>
   </div>
   <div class="content">
+    <fund-card name="kt-st"></fund-card>
+    <fund-card name="ktplus"></fund-card>
+    <fund-card name="k-fixed"></fund-card>
     <input type="text" name="name" value="" v-model="symbol">
     <button @click="getNav">Get NAV</button>
     <div width="400px" height="500px">

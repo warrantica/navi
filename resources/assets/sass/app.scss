@@ -1,5 +1,32 @@
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-
 // Variables
 @import "variables";
+
+body, html{
+  margin: 0;
+}
+
+body{
+  display: flex;
+  min-height: 100vh;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  font: $font-size-base $main-font;
+  line-height: $line-height-base;
+  color: $text-color;
+}
+
+.sidebar{
+  width: 15vw;
+  background: $primary;
+}
+
+.sidebar-logo{
+  color: white;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.content{
+  flex: 1;
+}

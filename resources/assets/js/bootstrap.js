@@ -3,6 +3,7 @@ require('bootstrap-sass');
 
 window.Vue = require('vue');
 
+window.moment = require('moment');
 window.Chart = require('chart.js');
 
 //inject csrf tokens to all (non-GET) requests

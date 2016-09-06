@@ -1,3 +1,30 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+body, html {
+  margin: 0; }
+
+body {
+  display: -webkit-box;
+  display: flex;
+  min-height: 100vh;
+  flex-flow: row nowrap;
+  -webkit-box-align: stretch;
+  align-items: stretch;
+  font: 16px "Roboto";
+  line-height: 1.5;
+  color: #333; }
+
+.sidebar {
+  width: 15vw;
+  background: #795548; }
+
+.sidebar-logo {
+  color: white;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem; }
+
+.content {
+  -webkit-box-flex: 1;
+  flex: 1; }
 
 /*# sourceMappingURL=app.css.map */

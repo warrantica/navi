@@ -9,7 +9,7 @@ window.Navi = require('./naviAPI.js');
 Components
 ==============================================================================*/
 
-//Vue.components(example, require('./components/example.vue'));
+Vue.component('fund-card', require('./components/fundCard.vue'));
 
 /*==============================================================================
 Vue Instance
@@ -26,11 +26,6 @@ let App = new Vue({
 
   methods: {
     getNav(){
-      // Navi.getNav(this.symbol).then(value => {
-      //   console.log(value);
-      //   this.name = value.name;
-      //   this.nav = value.nav;
-      // });
       Navi.getHistoricalNav(this.symbol).then(value => {
         console.log(value);
 
@@ -38,11 +33,9 @@ let App = new Vue({
         let nav = [];
 
         for(let i of value[0]){
-          date.unshift(i.date);
+          date.unshift(moment(i.date, 'D/M/YYYY'));
           nav.unshift(i.nav);
         }
-
-        console.log(value[0]);
 
         let ctx = document.getElementById('chart');
         let myChart = new Chart(ctx, {
@@ -56,7 +49,16 @@ let App = new Vue({
           },
           options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            scales: {
+              xAxes: [{
+                type: 'time',
+                time: {
+                  unit: 'day',
+                  displayFormats: { day: 'DD/MM/YY' }
+                }
+              }]
+            }
           }
         });
       });
