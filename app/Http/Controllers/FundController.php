@@ -48,7 +48,6 @@ class FundController extends Controller
       $html = new Crawler((string)$request->getBody());
 
       $result = [];
-      //dd($html->filter('tr[bgcolor="#F2F2F2"]'));
       $result[] = $html->filter('tr[bgcolor="#F2F2F2"]')->each(function(Crawler $node, $i){
         return [
           'date' => $node->children()->eq(0)->text(),

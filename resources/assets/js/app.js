@@ -33,6 +33,32 @@ let App = new Vue({
       // });
       Navi.getHistoricalNav(this.symbol).then(value => {
         console.log(value);
+
+        let date = [];
+        let nav = [];
+
+        for(let i of value[0]){
+          date.unshift(i.date);
+          nav.unshift(i.nav);
+        }
+
+        console.log(value[0]);
+
+        let ctx = document.getElementById('chart');
+        let myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: date,
+            datasets: [{
+              label: this.symbol,
+              data: nav
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false
+          }
+        });
       });
     }
   },

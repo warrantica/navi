@@ -19,9 +19,8 @@
   <div class="content">
     <input type="text" name="name" value="" v-model="symbol">
     <button @click="getNav">Get NAV</button>
-    <div class="">
-      @{{ name }} <br>
-      @{{ nav }}
+    <div width="400px" height="500px">
+      <canvas id="chart" width="300" height="300"></canvas>
     </div>
   </div>
 
