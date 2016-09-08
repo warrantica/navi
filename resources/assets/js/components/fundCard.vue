@@ -4,7 +4,10 @@
       {{ name }}
     </div>
     <div class="fundCard-nav">
-      {{ nav }} ({{ navChange }}%)
+      {{ nav }}
+    </div>
+    <div class="fundCard-change">
+      ({{ navChange }}%)
     </div>
   </div>
 </template>
@@ -52,5 +55,9 @@ export default {
 .fundCard-name{
   font-size: 1.5rem;
   text-transform: uppercase;
+}
+
+.fundCard-change{
+  font-size: 0.7em;
 }
 </style>

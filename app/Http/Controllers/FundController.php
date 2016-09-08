@@ -70,7 +70,7 @@ class FundController extends Controller
       $request = $guzzle->post('/AIMC/aimc_navSearchResult.jsp',['form_params'=>[
         'searchType' => 'oldFund',
         'abbrName' => $name,
-        'data_month' => $date['month']-2,
+        'data_month' => $date['month']-1,
         'data_year' => $date['year'],
         'data_month2' => $date['month'],
         'data_year2' => $date['year']

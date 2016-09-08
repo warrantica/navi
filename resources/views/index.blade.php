@@ -17,13 +17,7 @@
     <div class="sidebar-logo">Navi</div>
   </div>
   <div class="content">
-    <fund-card name="kt-st" color="#2196F3"></fund-card>
-    <fund-card name="ktplus" color="#8BC34A"></fund-card>
-    <fund-card name="k-fixed" color="#FF5722"></fund-card>
-    
-    <div width="400px" height="500px">
-      <canvas id="chart" width="300" height="300"></canvas>
-    </div>
+    <router-view></router-view>
   </div>
 
   <!-- Javascript -->

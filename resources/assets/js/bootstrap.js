@@ -2,6 +2,8 @@ window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
 
 window.Vue = require('vue');
+window.VueRouter = require('vue-router');
+Vue.use(VueRouter);
 
 window.moment = require('moment');
 window.Chart = require('chart.js');

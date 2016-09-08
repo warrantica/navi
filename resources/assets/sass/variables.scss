@@ -1,5 +1,5 @@
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
 
 // Colors
 $primary: #795548;
@@ -19,7 +19,7 @@ $text-color: #333;
 
 // Style Presets
 @mixin elevation-1{
-  
+
 }
 
 @mixin style-card {
