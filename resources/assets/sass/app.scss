@@ -30,3 +30,11 @@ body{
 .content{
   flex: 1;
 }
+
+.section{
+  padding: 20px;
+}
+
+.section:first-child{
+  padding-top: 0;
+}

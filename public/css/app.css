@@ -27,4 +27,10 @@ body {
   -webkit-box-flex: 1;
   flex: 1; }
 
+.section {
+  padding: 20px; }
+
+.section:first-child {
+  padding-top: 0; }
+
 /*# sourceMappingURL=app.css.map */
