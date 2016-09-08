@@ -20,5 +20,16 @@ export default {
         error: () => reject('getHistoricalNav() error')
       });
     });
+  },
+
+  getHistoricalChartData(name){
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        type: 'GET',
+        url: '/api/chart/' + name,
+        success: data => resolve(data),
+        error: () => reject('getHistoricalChartData() error')
+      });
+    });
   }
 }

@@ -18,6 +18,10 @@ $text-color: #333;
 
 
 // Style Presets
+@mixin elevation-1{
+  
+}
+
 @mixin style-card {
   border-radius: 2px;
   padding: 15px;

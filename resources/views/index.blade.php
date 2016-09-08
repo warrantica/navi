@@ -17,11 +17,10 @@
     <div class="sidebar-logo">Navi</div>
   </div>
   <div class="content">
-    <fund-card name="kt-st"></fund-card>
-    <fund-card name="ktplus"></fund-card>
-    <fund-card name="k-fixed"></fund-card>
-    <input type="text" name="name" value="" v-model="symbol">
-    <button @click="getNav">Get NAV</button>
+    <fund-card name="kt-st" color="#2196F3"></fund-card>
+    <fund-card name="ktplus" color="#8BC34A"></fund-card>
+    <fund-card name="k-fixed" color="#FF5722"></fund-card>
+    
     <div width="400px" height="500px">
       <canvas id="chart" width="300" height="300"></canvas>
     </div>

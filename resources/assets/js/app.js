@@ -19,53 +19,58 @@ let App = new Vue({
   el: 'body',
 
   data: {
-    symbol: '',
-    name: '',
-    nav: '0.0000'
+    
   },
 
   methods: {
-    getNav(){
-      Navi.getHistoricalNav(this.symbol).then(value => {
-        console.log(value);
 
-        let date = [];
-        let nav = [];
-
-        for(let i of value[0]){
-          date.unshift(moment(i.date, 'D/M/YYYY'));
-          nav.unshift(i.nav);
-        }
-
-        let ctx = document.getElementById('chart');
-        let myChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: date,
-            datasets: [{
-              label: this.symbol,
-              data: nav
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              xAxes: [{
-                type: 'time',
-                time: {
-                  unit: 'day',
-                  displayFormats: { day: 'DD/MM/YY' }
-                }
-              }]
-            }
-          }
-        });
-      });
-    }
   },
 
   ready(){
     console.log("Vue loaded");
+
+    Promise.all([
+      Navi.getHistoricalChartData('kt-st'),
+      Navi.getHistoricalChartData('ktplus'),
+      Navi.getHistoricalChartData('k-fixed')
+    ]).then(values => {
+      console.log(values);
+
+      let ctx = document.getElementById('chart');
+      let myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          datasets: [{
+            label: 'kt-st',
+            data: values[0],
+            fill: false,
+            borderColor: '#2196F3'
+          },{
+            label: 'ktplus',
+            data: values[1],
+            fill: false,
+            borderColor: '#8BC34A'
+          },{
+            label: 'k-fixed',
+            data: values[2],
+            fill: false,
+            borderColor: '#FF5722'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            xAxes: [{
+              type: 'time',
+              time: {
+                unit: 'day',
+                displayFormats: { day: 'DD/MM/YY' }
+              }
+            }]
+          }
+        }
+      });
+    });
   }
 });
