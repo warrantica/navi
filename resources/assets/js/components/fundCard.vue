@@ -55,7 +55,7 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 @import "../../sass/variables.scss";
 
 .fundCard{
