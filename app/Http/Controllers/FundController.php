@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Funds;
+
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -97,7 +99,15 @@ class FundController extends Controller
         ];
       }
 
-      return $result;
+      return [
+        'name' => $name,
+        'fundData' => Funds::where('name', $name)->first(),
+        'chartData' => $result
+      ];
+    }
+
+    public function all(){
+      return Funds::all();
     }
 
     public function getLatestDate(){

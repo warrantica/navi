@@ -1,10 +1,11 @@
 <template>
   <div class="routerWrapper">
     <div class="section">
-      <fund-card name="kt-st" color="#2196F3"></fund-card>
+      <!-- <fund-card name="kt-st" color="#2196F3"></fund-card>
       <fund-card name="k-fixed" color="#FF5722"></fund-card>
       <fund-card name="k-cbond" color="#E91E63"></fund-card>
-      <fund-card name="tmbabf" color="#8BC34A"></fund-card>
+      <fund-card name="tmbabf" color="#8BC34A"></fund-card> -->
+      <fund-card v-for="fund in fundData" :name="fund.name" :color="fund.color"></fund-card>
     </div>
 
     <div class="section">
@@ -19,65 +20,65 @@
 window.Navi = require('../naviAPI.js');
 
 export default{
+  data(){ return{
+    fundData: []
+  }},
+
   methods: {
 
   },
 
   ready(){
-    Promise.all([
-      Navi.getHistoricalChartData('kt-st'),
-      Navi.getHistoricalChartData('k-fixed'),
-      Navi.getHistoricalChartData('k-cbond'),
-      Navi.getHistoricalChartData('tmbabf')
-    ]).then(values => {
-      console.log(values);
 
-      let ctx = document.getElementById('chart');
-      let myChart = new Chart(ctx, {
-        type: 'line',
-        data: { datasets: [{
-          label: 'kt-st',
-          data: values[0],
-          fill: false,
-          borderColor: '#2196F3'
-        },{
-          label: 'k-fixed',
-          data: values[1],
-          fill: false,
-          borderColor: '#FF5722'
-        },{
-          label: 'k-cbond',
-          data: values[2],
-          fill: false,
-          borderColor: '#E91E63'
-        },{
-          label: 'tmbabf',
-          data: values[3],
-          fill: false,
-          borderColor: '#8BC34A'
-        }]},
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            xAxes: [{
-              type: 'time',
-              time: {
-                unit: 'day',
-                displayFormats: { day: 'DD/MM/YY' }
-              },
-              ticks: { callback(label, index, arr){
-                return index % Math.ceil(arr.length/10) === 0 ? label : null;
-              }}
-            }],
-            yAxes: [{
-              ticks: { callback(label, index, arr){
-                return index % Math.ceil(arr.length/5) === 0 ? label.toFixed(4) : null;
-              }}
-            }]
-          },
-          legend: { display: false }
+    let chartPromise = Navi.getAllFunds().then(data => {
+      this.fundData = data;
+      console.log(this.fundData);
+
+      let promises = [];
+      for(let fund of this.fundData){
+        promises.push(Navi.getHistoricalChartData(fund.name));
+      }
+
+      return promises;
+    }).then(promises => {
+      //There's gotta be a better way than to call then on an array of promises
+      //just to all() them again...
+      Promise.all(promises).then(values => {
+        console.log(values);
+
+        let datasets = [];
+        for(let value of values){
+          datasets.push({
+            label: value.name,
+            data: value.chartData,
+            fill: false,
+            borderColor: value.fundData.color
+          });
         }
+
+        let ctx = document.getElementById('chart');
+        let myChart = new Chart(ctx, {
+          type: 'line', data: { datasets },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+              xAxes: [{
+                type: 'time',
+                time: {
+                  unit: 'day',
+                  displayFormats: { day: 'DD/MM/YY' }
+                },
+                ticks: { callback(label, index, arr){
+                  return index % Math.ceil(arr.length/10) === 0 ? label : null;
+                }}
+              }],
+              yAxes: [{ ticks: { callback(label, index, arr){
+                return index % Math.ceil(arr.length/5) === 0 ? label.toFixed(4) : null;
+              }}}]
+            },
+            legend: { display: false }
+          }
+        });
       });
     });
   }

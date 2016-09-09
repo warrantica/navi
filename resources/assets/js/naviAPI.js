@@ -1,4 +1,15 @@
 export default {
+  getAllFunds(){
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        type: 'GET',
+        url: '/api/fund',
+        success: data => resolve(data),
+        error: () => reject('getAllFunds() error')
+      });
+    });
+  },
+
   getNav(name){
     return new Promise((resolve, reject) => {
       if(!name) reject('Name must not be empty');
@@ -6,7 +17,7 @@ export default {
         type: 'GET',
         url: '/api/fund/' + name,
         success: data => resolve(data),
-        error: () => reject('getNav() error')
+        error: () => reject('getNav() for ' + name + ' error')
       });
     });
   },
@@ -17,7 +28,7 @@ export default {
         type: 'GET',
         url: '/api/history/' + name,
         success: data => resolve(data),
-        error: () => reject('getHistoricalNav() error')
+        error: () => reject('getHistoricalNav() for ' + name + ' error')
       });
     });
   },
@@ -28,7 +39,7 @@ export default {
         type: 'GET',
         url: '/api/chart/' + name,
         success: data => resolve(data),
-        error: () => reject('getHistoricalChartData() error')
+        error: () => reject('getHistoricalChartData() for ' + name + ' error')
       });
     });
   }
