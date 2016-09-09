@@ -1,10 +1,7 @@
 <template>
   <div class="routerWrapper">
     <div class="section">
-      <!-- <fund-card name="kt-st" color="#2196F3"></fund-card>
-      <fund-card name="k-fixed" color="#FF5722"></fund-card>
-      <fund-card name="k-cbond" color="#E91E63"></fund-card>
-      <fund-card name="tmbabf" color="#8BC34A"></fund-card> -->
+      <!-- <fund-card name="tmbabf" color="#8BC34A"></fund-card> -->
       <fund-card v-for="fund in fundData" :name="fund.name" :color="fund.color"></fund-card>
     </div>
 
