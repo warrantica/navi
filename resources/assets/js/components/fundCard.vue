@@ -61,7 +61,7 @@ export default {
 .fundCard{
   @include style-card;
   color: white;
-  display: inline-block;
+  margin: 10px;
 }
 
 .fundCard:first-child{

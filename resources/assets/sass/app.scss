@@ -13,6 +13,7 @@ body{
   font: $font-size-base $main-font;
   line-height: $line-height-base;
   color: $text-color;
+  background: $dark-grey;
 }
 
 .sidebar{
@@ -32,7 +33,7 @@ body{
 }
 
 .section{
-  padding: 20px;
+  padding: 10px 20px 0 20px;
 }
 
 .section:first-child{
