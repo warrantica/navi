@@ -9,6 +9,7 @@
     <div class="section">
 
       <div class="chartContainer">
+        <div class="cardHeader">Fund Performance</div>
         <div class="chartControl">
           1m 2m 3m 6m 1y
         </div>
@@ -56,13 +57,14 @@ export default{
             label: value.name,
             data: value.chartData,
             fill: false,
-            borderColor: value.fundData.color
+            borderColor: value.fundData.color,
+            tension: 0
           });
         }
 
         Chart.defaults.global.defaultFontColor = '#FFFFFF';
         Chart.defaults.global.defaultFontFamily = 'Roboto';
-        Chart.defaults.global.defaultFontSize = 16;
+        Chart.defaults.global.defaultFontSize = 14;
 
         let ctx = document.getElementById('chart');
         let myChart = new Chart(ctx, {
@@ -79,13 +81,13 @@ export default{
                   callback: (label, i, arr) => i % Math.ceil(arr.length/4) === 0 ? label : null,
                   maxRotation: 0,
                 },
-                gridLines: { color: 'rgba(255,255,255,0.24)', zeroLineWidth: 3, zeroLineColor: '#FFFFFF' }
+                gridLines: { color: 'rgba(255,255,255,0.24)', zeroLineWidth: 2, zeroLineColor: '#FFFFFF' }
               }],
               yAxes: [{
                 ticks: {
                   callback: (label, i, arr) => i % Math.ceil(arr.length/5) === 0 ? label.toFixed(4) : null
                 },
-                gridLines: { color: 'rgba(0,0,0,0)', zeroLineWidth: 3, zeroLineColor: '#FFFFFF' }
+                gridLines: { color: 'rgba(0,0,0,0)', zeroLineWidth: 2, zeroLineColor: '#FFFFFF' }
               }]
             },
             legend: { display: false }
@@ -108,8 +110,6 @@ export default{
 
 .fundCard-newButton{
   @include style-card;
-  background: $dark-grey;
-  border: 1px $white solid;
   margin: 10px;
   display: flex;
   flex-flow: row;
@@ -119,11 +119,13 @@ export default{
 .chartContainer{
   @include style-card;
   padding: 10px 40px 20px 20px;
-  background: $dark-grey;
+  position: relative;
 }
 
 .chartControl{
   margin-bottom: 10px;
+  position: absolute;
+  top: 10px; right: 10px;
 }
 
 .chartWrapper{

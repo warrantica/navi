@@ -3,14 +3,11 @@
     <div class="fundCard-name">
       {{ name }}
     </div>
-    <div class="fundCard-fullName">
-      {{ fullName }}
+    <div class="fundCard-change">
+      {{ navChange }}%
     </div>
     <div class="fundCard-nav">
-      {{ nav }}
-    </div>
-    <div class="fundCard-change">
-      {{ pipChange }} pips ({{ navChange }}%)
+      {{ pipChange }} from {{ oldNav }} to {{ nav }}
     </div>
   </div>
 </template>
@@ -27,8 +24,7 @@ export default {
 
   data(){ return {
     nav: 0,
-    oldNav: 0,
-    fullName: ''
+    oldNav: 0
   }},
 
   computed: {
@@ -49,7 +45,6 @@ export default {
     Navi.getNav(this.name).then(data => {
       this.nav = data.nav;
       this.oldNav = data.oldNav;
-      this.fullName = data.fullName;
     });
   }
 }
@@ -69,11 +64,16 @@ export default {
 }
 
 .fundCard-name{
-  font-size: 1.5rem;
   text-transform: uppercase;
+  font-weight: $font-weight-bold;
 }
 
-.fundCard-fullName, .fundCard-change{
-  font-size: 0.7em;
+.fundCard-change{
+  font-size: 3rem;
+  font-weight: $font-weight-light;
+}
+
+.fundCard-nav{
+  font-size: 0.7rem;
 }
 </style>

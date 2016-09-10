@@ -39,3 +39,10 @@ body{
 .section:first-child{
   padding-top: 0;
 }
+
+.cardHeader{
+  font-size: 0.9rem;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}

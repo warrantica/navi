@@ -1,19 +1,23 @@
 // Fonts
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:100,400,700);
 
 // Colors
 $primary: #795548;
 $accent: #FFEB3B;
 $white: #FFFFFF;
-$light-grey: #FAFAFA;
-$grey: #E0E0E0;
-$dark-grey: #424242;
+$light-grey: #424242;
+$grey: #303030;
+$dark-grey: #212121;
 
 // Typography
 $main-font: "Roboto";
 $font-size-base: 16px;
 $line-height-base: 1.5;
 $text-color: #fff;
+
+$font-weight-normal: 400;
+$font-weight-light: 100;
+$font-weight-bold: 700;
 
 // Buttons
 
@@ -49,7 +53,8 @@ $text-color: #fff;
 @mixin style-card {
   border-radius: 2px;
   padding: 15px;
-  background: $white;
+  background: $grey;
+  border: 1px $light-grey solid;
   display: inline-block;
 }
 
