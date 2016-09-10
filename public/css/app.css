@@ -16,7 +16,7 @@ body {
 
 .sidebar {
   width: 15vw;
-  background: #795548; }
+  background: #303F9F; }
 
 .sidebar-logo {
   color: white;
@@ -29,7 +29,9 @@ body {
   flex: 1; }
 
 .section {
-  padding: 10px 20px 0 20px; }
+  box-sizing: border-box;
+  padding: 10px 20px 0 20px;
+  width: 100%; }
 
 .section:first-child {
   padding-top: 0; }

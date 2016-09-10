@@ -33,7 +33,9 @@ body{
 }
 
 .section{
+  box-sizing: border-box;
   padding: 10px 20px 0 20px;
+  width: 100%;
 }
 
 .section:first-child{

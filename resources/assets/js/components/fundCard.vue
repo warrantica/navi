@@ -4,7 +4,7 @@
       {{ name }}
     </div>
     <div class="fundCard-change">
-      {{ navChange }}%
+      {{ navChange }}<span class="fundCard-percent">%</span>
     </div>
     <div class="fundCard-nav">
       {{ pipChange }} from {{ oldNav }} to {{ nav }}
@@ -71,6 +71,10 @@ export default {
 .fundCard-change{
   font-size: 3rem;
   font-weight: $font-weight-light;
+}
+
+.fundCard-percent{
+  font-size: 1.5rem;
 }
 
 .fundCard-nav{

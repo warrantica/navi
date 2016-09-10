@@ -90,7 +90,26 @@ export default{
                 gridLines: { color: 'rgba(0,0,0,0)', zeroLineWidth: 2, zeroLineColor: '#FFFFFF' }
               }]
             },
-            legend: { display: false }
+            legend: { display: false },
+            tooltips: {
+              mode: 'x-axis',
+              backgroundColor: '#212121',
+              bodySpacing: 10,
+              bodyFontSize: 16,
+              xPadding: 10, yPadding: 10,
+              caretSize: 0,
+              cornerRadius: 2,
+              callbacks: {
+                title: (arr,data) => moment(arr[0].xLabel).format('DD/MM/YY'),
+                label: (item,data) => '  '+data.datasets[item.datasetIndex].label+': '+item.yLabel.toFixed(4),
+                labelColor: (item,ctx) => {
+                  return {
+                    borderColor: ctx.data.datasets[item.datasetIndex].borderColor,
+                    backgroundColor: ctx.data.datasets[item.datasetIndex].borderColor
+                  }
+                }
+              }
+            }
           }
         });
       });
@@ -118,8 +137,9 @@ export default{
 
 .chartContainer{
   @include style-card;
-  padding: 10px 40px 20px 20px;
+  padding: 20px 40px 20px 20px;
   position: relative;
+  width: 80%;
 }
 
 .chartControl{
@@ -129,7 +149,7 @@ export default{
 }
 
 .chartWrapper{
-  width: 500px;
+  width: 100%;
   height: 300px;
 }
 </style>
