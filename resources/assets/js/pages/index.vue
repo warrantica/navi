@@ -11,7 +11,11 @@
       <div class="chartContainer">
         <div class="cardHeader">Fund Performance</div>
         <div class="chartControl">
-          1m 2m 3m 6m 1y
+          <span class="timeControl" @click="updateChart(1)">1m</span>
+          <span class="timeControl" @click="updateChart(2)">2m</span>
+          <span class="timeControl" @click="updateChart(3)">3m</span>
+          <span class="timeControl" @click="updateChart(6)">6m</span>
+          <span class="timeControl" @click="updateChart(12)">1y</span>
         </div>
         <div class="chartWrapper">
           <canvas id="chart" width="100" height="300"></canvas>

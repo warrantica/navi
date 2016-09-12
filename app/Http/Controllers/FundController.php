@@ -41,32 +41,6 @@ class FundController extends Controller
       ];
     }
 
-    public function history($name){
-      $date = FundController::getLatestDate();
-
-      $guzzle = new Client(['base_uri' => 'http://www.thaimutualfund.com']);
-      $request = $guzzle->post('/AIMC/aimc_navSearchResult.jsp',['form_params'=>[
-        'searchType' => 'oldFund',
-        'abbrName' => $name,
-        'data_month' => $date['month']-1,
-        'data_year' => $date['year'],
-        'data_month2' => $date['month'],
-        'data_year2' => $date['year']
-      ]]);
-
-      $html = new Crawler((string)$request->getBody());
-
-      $result = [];
-      $result = $html->filter('tr[bgcolor="#F2F2F2"]')->each(function(Crawler $node, $i){
-        return [
-          'date' => $node->children()->eq(0)->text(),
-          'nav' => $node->children()->eq(2)->text()
-        ];
-      });
-
-      return $result;
-    }
-
     public function chart($name, $numberOfMonths){
       $date = FundController::getLatestDate();
       $dateFrom = FundController::getDateFrom($date, $numberOfMonths);
@@ -113,7 +87,7 @@ class FundController extends Controller
       return Funds::all();
     }
 
-    public function getLatestDate(){
+    private function getLatestDate(){
       $guzzle = new Client(['base_uri' => 'http://www.thaimutualfund.com']);
       $request = $guzzle->post('/AIMC/aimc_navCenter.jsp');
       $html = new Crawler((string)$request->getBody());
@@ -125,11 +99,11 @@ class FundController extends Controller
       );
     }
 
-    public function getDateFrom(Carbon $date, $numberOfMonths){
+    private function getDateFrom(Carbon $date, $numberOfMonths){
       return (new Carbon($date))->subMonths($numberOfMonths);
     }
 
-    public function formatDate($date){
+    private function formatDate($date){
       $dateArr = explode("/", $date);
 
       $dateArr[2] -= 543;

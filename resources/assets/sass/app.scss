@@ -48,3 +48,13 @@ body{
   text-transform: uppercase;
   margin-bottom: 10px;
 }
+
+.formInput{
+  display: block;
+  background: $light-grey;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  font: $main-font;
+  color: $white;
+}
