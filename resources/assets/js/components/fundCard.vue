@@ -7,7 +7,10 @@
       {{ navChange }}<span class="fundCard-percent">%</span>
     </div>
     <div class="fundCard-nav">
-      {{ pipChange }} from {{ oldNav }} to {{ nav }}
+      {{ pipChange }} from {{ navFrom }} to {{ navTo }}
+    </div>
+    <div class="fundCard-date">
+      From {{ dateFrom }} to {{ dateTo }}
     </div>
   </div>
 </template>
@@ -23,28 +26,32 @@ export default {
   },
 
   data(){ return {
-    nav: 0,
-    oldNav: 0
+    navFrom: 0,
+    navTo: 0,
+    dateFrom: '',
+    dateTo: ''
   }},
 
   computed: {
     pipChange(){
-      if(this.nav === 0) return '-';
-      let change = Math.round((this.nav - this.oldNav)*10000);
+      if(this.navTo === 0) return '-';
+      let change = Math.round((this.navTo - this.navFrom)*10000);
       return change > 0 ? '+' + change : change;
     },
 
     navChange(){
       if(this.nav === 0) return '-';
-      let change = ((this.nav - this.oldNav)*100/this.oldNav).toFixed(4);
+      let change = ((this.navTo - this.navFrom)*100/this.navFrom).toFixed(4);
       return change > 0 ? '+' + change : change;
     }
   },
 
   ready(){
     Navi.getNav(this.name).then(data => {
-      this.nav = data.nav;
-      this.oldNav = data.oldNav;
+      this.navFrom = data.navFrom;
+      this.navTo = data.navTo;
+      this.dateFrom = data.dateFrom;
+      this.dateTo = data.dateTo;
     });
   }
 }
@@ -77,7 +84,7 @@ export default {
   font-size: 1.5rem;
 }
 
-.fundCard-nav{
+.fundCard-nav, .fundCard-date{
   font-size: 0.7rem;
 }
 </style>

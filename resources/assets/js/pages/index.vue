@@ -51,9 +51,8 @@ export default{
           this.datasets.push({
             label: value.name,
             data: value.chartData,
-            fill: false,
             borderColor: value.fundData.color,
-            tension: 0
+            fill: false, tension: 0
           });
         }
 
@@ -105,9 +104,10 @@ export default{
 
 .chartContainer{
   @include style-card;
+  box-sizing: border-box;
   padding: 20px 40px 20px 20px;
   position: relative;
-  width: 80%;
+  width: 100%;
 }
 
 .chartControl{

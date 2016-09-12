@@ -36,8 +36,10 @@ class FundController extends Controller
 
       return [
         'fullName' => $fullName,
-        'oldNav' => $nodes->eq(1)->children()->eq(2)->text(),
-        'nav' => $nodes->eq(0)->children()->eq(2)->text()
+        'navFrom' => $nodes->eq(1)->children()->eq(2)->text(),
+        'navTo' => $nodes->eq(0)->children()->eq(2)->text(),
+        'dateFrom' => $nodes->eq(1)->children()->eq(0)->text(),
+        'dateTo' => $nodes->eq(0)->children()->eq(0)->text()
       ];
     }
 
