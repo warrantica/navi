@@ -10,21 +10,23 @@ use App\Funds;
 
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
+use Carbon\Carbon;
 
 class FundController extends Controller
 {
 
     public function show($name){
       $date = FundController::getLatestDate();
+      $dateFrom = FundController::getDateFrom($date, 1);
 
       $guzzle = new Client(['base_uri' => 'http://www.thaimutualfund.com']);
       $request = $guzzle->post('/AIMC/aimc_navSearchResult.jsp',['form_params'=>[
         'searchType' => 'oldFund',
         'abbrName' => $name,
-        'data_month' => $date['month']-1,
-        'data_year' => $date['year'],
-        'data_month2' => $date['month'],
-        'data_year2' => $date['year']
+        'data_month' => $dateFrom->month,
+        'data_year' => $dateFrom->year + 543,
+        'data_month2' => $date->month,
+        'data_year2' => $date->year + 543
       ]]);
 
       $html = new Crawler((string)$request->getBody());
@@ -65,17 +67,18 @@ class FundController extends Controller
       return $result;
     }
 
-    public function chart($name){
+    public function chart($name, $numberOfMonths){
       $date = FundController::getLatestDate();
+      $dateFrom = FundController::getDateFrom($date, $numberOfMonths);
 
       $guzzle = new Client(['base_uri' => 'http://www.thaimutualfund.com']);
       $request = $guzzle->post('/AIMC/aimc_navSearchResult.jsp',['form_params'=>[
         'searchType' => 'oldFund',
         'abbrName' => $name,
-        'data_month' => $date['month']-1,
-        'data_year' => $date['year'],
-        'data_month2' => $date['month'],
-        'data_year2' => $date['year']
+        'data_month' => $dateFrom->month,
+        'data_year' => $dateFrom->year + 543,
+        'data_month2' => $date->month,
+        'data_year2' => $date->year + 543
       ]]);
 
       $html = new Crawler((string)$request->getBody());
@@ -115,11 +118,15 @@ class FundController extends Controller
       $request = $guzzle->post('/AIMC/aimc_navCenter.jsp');
       $html = new Crawler((string)$request->getBody());
 
-      return [
-        'date' => $html->filter('select[name="data_date"] option[selected]')->attr('value'),
-        'month' => $html->filter('select[name="data_month"] option[selected]')->attr('value'),
-        'year' => $html->filter('select[name="data_year"] option[selected]')->attr('value')
-      ];
+      return Carbon::create(
+        $html->filter('select[name="data_year"] option[selected]')->attr('value') - 543,
+        $html->filter('select[name="data_month"] option[selected]')->attr('value'),
+        $html->filter('select[name="data_date"] option[selected]')->attr('value')
+      );
+    }
+
+    public function getDateFrom(Carbon $date, $numberOfMonths){
+      return (new Carbon($date))->subMonths($numberOfMonths);
     }
 
     public function formatDate($date){

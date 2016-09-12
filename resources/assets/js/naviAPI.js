@@ -33,11 +33,11 @@ export default {
     });
   },
 
-  getHistoricalChartData(name){
+  getHistoricalChartData(name, numberOfMonths){
     return new Promise((resolve, reject) => {
       $.ajax({
         type: 'GET',
-        url: '/api/chart/' + name,
+        url: '/api/chart/' + name + '/' + numberOfMonths,
         success: data => resolve(data),
         error: () => reject('getHistoricalChartData() for ' + name + ' error')
       });

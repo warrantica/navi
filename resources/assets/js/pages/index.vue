@@ -41,7 +41,7 @@ export default{
 
       let promises = [];
       for(let fund of this.fundData){
-        promises.push(Navi.getHistoricalChartData(fund.name));
+        promises.push(Navi.getHistoricalChartData(fund.name, 1));
       }
 
       return promises;
