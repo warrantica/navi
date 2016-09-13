@@ -4,6 +4,9 @@
       This is {{ fundData.name }} <br>
       Nav: {{ fundData.nav }}
     </div>
+    <div class="section">
+      <performance-graph></performance-graph>
+    </div>
   </div>
 </template>
 
@@ -15,6 +18,7 @@ export default {
 
   ready(){
     Navi.getNav(this.$route.params.fundname).then(data => this.fundData = data);
+    this.$broadcast('updateChart', [this.$route.params.fundname]);
   }
 }
 </script>

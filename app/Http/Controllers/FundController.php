@@ -71,9 +71,17 @@ class FundController extends Controller
         ];
       }
 
+      $fund = Fund::where('name', $name)->first();
+      if($fund === null){
+        $fund = new Fund([
+          'name' => $name,
+          'color' => '#FFFFFF'
+        ]);
+      }
+
       return [
         'name' => $name,
-        'fundData' => Fund::where('name', $name)->first(),
+        'fundData' => $fund,
         'chartData' => $result
       ];
     }

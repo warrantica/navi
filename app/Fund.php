@@ -16,6 +16,11 @@ class Fund extends Model
       'refreshDate'
     ];
 
+    protected $fillable = [
+      'name',
+      'color'
+    ];
+
     public function getCacheIsUsableAttribute(){
       return ($this->refreshDate !== null
         && $this->refreshDate->isSameDay(Carbon::now()))
