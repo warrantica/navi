@@ -100,6 +100,7 @@ class FundController extends Controller
       $fullName = $html->filter('.header center')->text();
       $nodes = $html->filter('tr[bgcolor="#F2F2F2"]');
       return [
+        'name' => $name,
         'fullName' => $fullName,
         'navFrom' => $nodes->eq(1)->children()->eq(2)->text(),
         'nav' => $nodes->eq(0)->children()->eq(2)->text(),

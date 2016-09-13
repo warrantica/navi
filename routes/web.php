@@ -1,5 +1,9 @@
 <?php
 
-Route::get('/{any?}', function () {
-    return view('index');
-})->where('any', '[^(api)]*');
+Route::get('/', function () {
+  return view('index');
+});
+
+Route::get('/fund/{any}', function(){
+  return view('index');
+})->where('any', '.*');
