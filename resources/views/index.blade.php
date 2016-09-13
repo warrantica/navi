@@ -14,7 +14,7 @@
 </head>
 <body>
   <div class="sidebar">
-    <div class="sidebar-logo">Navi</div>
+    <div class="sidebar-logo" v-link="'/'">Navi</div>
   </div>
   <div class="content">
     <router-view></router-view>

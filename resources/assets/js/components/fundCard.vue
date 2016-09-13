@@ -1,5 +1,5 @@
 <template>
-  <div class="fundCard" :style="{background:color}">
+  <div class="fundCard" :style="{background:color}" v-link="{ name: 'fund', params: { fundname: this.name }}">
     <div class="fundCard-name">
       {{ name }}
     </div>
@@ -64,6 +64,7 @@ export default {
   @include style-card;
   color: white;
   margin: 10px;
+  cursor: pointer;
 }
 
 .fundCard:first-child{

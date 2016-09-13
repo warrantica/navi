@@ -15,10 +15,13 @@ export default {
         gridLines: { color: 'rgba(255,255,255,0.24)', zeroLineWidth: 2, zeroLineColor: '#FFFFFF' }
       }],
       yAxes: [{
-        ticks: {
-          callback: (label, i, arr) => i % Math.ceil(arr.length/5) === 0 ? label.toFixed(4) : null
+        scaleLabel: {
+          display: true, labelString: 'Return (%)'
         },
-        gridLines: { color: 'rgba(0,0,0,0)', zeroLineWidth: 2, zeroLineColor: '#FFFFFF' }
+        ticks: {
+          callback: (label, i, arr) => i % Math.ceil(arr.length/5) === 0 ? label.toFixed(1) : null
+        },
+        gridLines: { color: 'rgba(255,255,255,0.24)', zeroLineWidth: 2, zeroLineColor: '#FFFFFF' }
       }]
     },
     legend: { display: false },

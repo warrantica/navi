@@ -12,6 +12,7 @@ Components
 Vue.component('fund-card', require('./components/fundCard.vue'));
 
 import Index from './pages/index.vue';
+import Fund from './pages/fund.vue';
 import FundAdd from './pages/fundAdd.vue';
 
 /*==============================================================================
@@ -38,6 +39,7 @@ let router = new VueRouter({
 router.mode = 'html5';
 router.map({
   '/': { component: Index },
+  '/fund/:fundname': { component: Fund, name: 'fund' },
   '/fund/add': { component: FundAdd }
 });
 
@@ -48,4 +50,4 @@ router.beforeEach(transition => {
   transition.next();
 });
 
-router.start(App, '.content');
+router.start(App, 'body');

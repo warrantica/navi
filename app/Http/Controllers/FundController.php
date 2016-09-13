@@ -69,12 +69,12 @@ class FundController extends Controller
 
       $result = [];
 
-      $result[] = ['x' => $data[count($data)-1]['x'], 'y' => '1'];
+      $result[] = ['x' => $data[count($data)-1]['x'], 'y' => '0'];
       $baseNav = $data[count($data)-1]['y'];
       for($i=count($data)-2; $i>=0; --$i){
         $result[] = [
           'x' => $data[$i]['x'],
-          'y' => $data[$i]['y']/$baseNav
+          'y' => (($data[$i]['y']/$baseNav) - 1) * 100
         ];
       }
 
