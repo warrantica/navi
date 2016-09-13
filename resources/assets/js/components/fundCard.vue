@@ -50,8 +50,8 @@ export default {
     Navi.getNav(this.name).then(data => {
       this.navFrom = data.navFrom;
       this.nav = data.nav;
-      this.dateFrom = data.dateFrom;
-      this.dateTo = data.dateTo;
+      this.dateFrom = moment(data.dateFrom).format('DD/MM/YYYY');
+      this.dateTo = moment(data.dateTo).format('DD/MM/YYYY');
     });
   }
 }
