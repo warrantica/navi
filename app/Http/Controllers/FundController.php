@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Funds;
+use App\Fund;
 
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
@@ -16,31 +16,24 @@ class FundController extends Controller
 {
 
     public function show($name){
-      $date = FundController::getLatestDate();
-      $dateFrom = FundController::getDateFrom($date, 1);
+      $fund = Fund::where('name', $name)->first();
+      if($fund !== null){
+        if($fund->cache_is_usable){
+          return $fund;
+        }else{
+          $data = FundController::fetchFundData($name);
+          $fund->navFrom = $data['navFrom'];
+          $fund->nav = $data['nav'];
+          $fund->dateFrom = $data['dateFrom'];
+          $fund->dateTo = $data['dateTo'];
+          $fund->refreshDate = Carbon::now();
+          $fund->save();
 
-      $guzzle = new Client(['base_uri' => 'http://www.thaimutualfund.com']);
-      $request = $guzzle->post('/AIMC/aimc_navSearchResult.jsp',['form_params'=>[
-        'searchType' => 'oldFund',
-        'abbrName' => $name,
-        'data_month' => $dateFrom->month,
-        'data_year' => $dateFrom->year + 543,
-        'data_month2' => $date->month,
-        'data_year2' => $date->year + 543
-      ]]);
-
-      $html = new Crawler((string)$request->getBody());
-
-      $fullName = $html->filter('.header center')->text();
-      $nodes = $html->filter('tr[bgcolor="#F2F2F2"]');
-
-      return [
-        'fullName' => $fullName,
-        'navFrom' => $nodes->eq(1)->children()->eq(2)->text(),
-        'navTo' => $nodes->eq(0)->children()->eq(2)->text(),
-        'dateFrom' => $nodes->eq(1)->children()->eq(0)->text(),
-        'dateTo' => $nodes->eq(0)->children()->eq(0)->text()
-      ];
+          return $data;
+        }
+      }else{
+        return FundController::fetchFundData($name);
+      }
     }
 
     public function chart($name, $numberOfMonths){
@@ -80,13 +73,39 @@ class FundController extends Controller
 
       return [
         'name' => $name,
-        'fundData' => Funds::where('name', $name)->first(),
+        'fundData' => Fund::where('name', $name)->first(),
         'chartData' => $result
       ];
     }
 
     public function all(){
-      return Funds::all();
+      return Fund::all();
+    }
+
+    private function fetchFundData($name){
+      $date = FundController::getLatestDate();
+      $dateFrom = FundController::getDateFrom($date, 1);
+
+      $guzzle = new Client(['base_uri' => 'http://www.thaimutualfund.com']);
+      $request = $guzzle->post('/AIMC/aimc_navSearchResult.jsp',['form_params'=>[
+        'searchType' => 'oldFund',
+        'abbrName' => $name,
+        'data_month' => $dateFrom->month,
+        'data_year' => $dateFrom->year + 543,
+        'data_month2' => $date->month,
+        'data_year2' => $date->year + 543
+      ]]);
+
+      $html = new Crawler((string)$request->getBody());
+      $fullName = $html->filter('.header center')->text();
+      $nodes = $html->filter('tr[bgcolor="#F2F2F2"]');
+      return [
+        'fullName' => $fullName,
+        'navFrom' => $nodes->eq(1)->children()->eq(2)->text(),
+        'nav' => $nodes->eq(0)->children()->eq(2)->text(),
+        'dateFrom' => FundController::dateToCarbon($nodes->eq(1)->children()->eq(0)->text())->toDateTimeString(),
+        'dateTo' => FundController::dateToCarbon($nodes->eq(0)->children()->eq(0)->text())->toDateTimeString()
+      ];
     }
 
     private function getLatestDate(){
@@ -113,5 +132,12 @@ class FundController extends Controller
       if(strlen($dateArr[1]) < 2) $dateArr[1] = "0" . $dateArr[1];
 
       return $dateArr[2] . "-" . $dateArr[1] . "-" . $dateArr[0];
+    }
+
+    private function dateToCarbon($date){
+      $dateArr = explode("/", $date);
+      $dateArr[2] -= 543;
+
+      return Carbon::createFromDate($dateArr[2], $dateArr[1], $dateArr[0]);
     }
 }

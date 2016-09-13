@@ -17,8 +17,11 @@ class CreateFundsTable extends Migration
             $table->increments('id');
             $table->string('name', 20)->unique();
             $table->string('color', 10);
+            $table->decimal('navFrom', 10, 4)->default(0);
             $table->decimal('nav', 10, 4)->default(0);
-            $table->date('navDate')->nullable();
+            $table->date('dateFrom')->nullable();
+            $table->date('dateTo')->nullable();
+            $table->date('refreshDate')->nullable();
             $table->timestamps();
         });
     }

@@ -7,7 +7,7 @@
       {{ navChange }}<span class="fundCard-percent">%</span>
     </div>
     <div class="fundCard-nav">
-      {{ pipChange }} from {{ navFrom }} to {{ navTo }}
+      {{ pipChange }} from {{ navFrom }} to {{ nav }}
     </div>
     <div class="fundCard-date">
       From {{ dateFrom }} to {{ dateTo }}
@@ -27,21 +27,21 @@ export default {
 
   data(){ return {
     navFrom: 0,
-    navTo: 0,
+    nav: 0,
     dateFrom: '',
     dateTo: ''
   }},
 
   computed: {
     pipChange(){
-      if(this.navTo === 0) return '-';
-      let change = Math.round((this.navTo - this.navFrom)*10000);
+      if(this.nav === 0) return '-';
+      let change = Math.round((this.nav - this.navFrom)*10000);
       return change > 0 ? '+' + change : change;
     },
 
     navChange(){
       if(this.nav === 0) return '-';
-      let change = ((this.navTo - this.navFrom)*100/this.navFrom).toFixed(4);
+      let change = ((this.nav - this.navFrom)*100/this.navFrom).toFixed(4);
       return change > 0 ? '+' + change : change;
     }
   },
@@ -49,7 +49,7 @@ export default {
   ready(){
     Navi.getNav(this.name).then(data => {
       this.navFrom = data.navFrom;
-      this.navTo = data.navTo;
+      this.nav = data.nav;
       this.dateFrom = data.dateFrom;
       this.dateTo = data.dateTo;
     });
