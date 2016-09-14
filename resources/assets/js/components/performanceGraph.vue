@@ -60,6 +60,7 @@ export default {
 
       let promises = [];
       for(let fund of funds){
+        if(fund === '') continue;
         promises.push(Navi.getHistoricalChartData(fund, this.numberOfMonths));
       }
 

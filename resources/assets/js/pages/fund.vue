@@ -9,6 +9,11 @@
     <div class="section">
       <performance-graph></performance-graph>
     </div>
+    <div class="section compareList">
+      <input type="text" v-for="fund in compareTo" track-by="$index" v-model="fund">
+      <button @click="addMoreFundToCompare">+</button>
+      <button @click="updateData">Update</button>
+    </div>
   </div>
 </template>
 
@@ -16,18 +21,23 @@
 export default {
   data(){ return {
     currentFundName: this.$route.params.fundname,
+    compareTo: [''],
     fundData: {}
   }},
 
   methods: {
     updateData(){
       Navi.getNav(this.$route.params.fundname).then(data => this.fundData = data);
-      this.$broadcast('updateChart', [this.$route.params.fundname]);
+      this.$broadcast('updateChart', this.compareTo.concat(this.$route.params.fundname));
     },
 
     goToFund(){
       this.$router.go({name: 'fund', params: {fundname: this.currentFundName}});
       this.updateData();
+    },
+
+    addMoreFundToCompare(){
+      this.compareTo.push('');
     }
   },
 
