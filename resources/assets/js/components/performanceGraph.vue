@@ -1,5 +1,10 @@
 <template>
   <div class="chartContainer">
+    <div class="loader" v-show="isLoading" transition="fade">
+      <div class="loadCircle loadCircleBig">
+        <div class="loadCircle loadCircleSmall"></div>
+      </div>
+    </div>
     <div class="cardHeader">Fund Performance</div>
     <div class="chartControl">
       <span class="timeControl" @click="updateInterval(1)">1m</span>
@@ -20,6 +25,7 @@ window.Vars = require('../vars.js');
 
 export default {
   data() { return {
+    isLoading: false,
     funds: [],
     numberOfMonths: 1,
     chart: {},
@@ -57,7 +63,7 @@ export default {
         promises.push(Navi.getHistoricalChartData(fund, this.numberOfMonths));
       }
 
-      //load
+      this.isLoading = true;
 
       Promise.all(promises).then(values => {
         this.datasets = [];
@@ -76,7 +82,7 @@ export default {
           options: this.chartOptions
         });
 
-        //finish loading
+        this.isLoading = false;
       });
     }
   }
@@ -94,6 +100,43 @@ export default {
   width: 100%;
 }
 
+.loader{
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  background: $grey;
+}
+
+.loadCircle{
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+  animation: pulse 1s cubic-bezier(.8, -0.2, 0.2, 1.2) infinite;
+  transition: all .2s ease;
+}
+
+.loadCircleBig{
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  animation-delay: 0.2s;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.5); }
+  100% { transform: scale(1); }
+}
+
 .chartControl{
   margin-bottom: 10px;
   position: absolute;
@@ -103,5 +146,14 @@ export default {
 .chartWrapper{
   width: 100%;
   height: 300px;
+}
+
+.fade-transition{
+  transition: all .2s ease;
+  opacity: 1;
+}
+
+.fade-enter, .fade-leave{
+  opacity: 0;
 }
 </style>
