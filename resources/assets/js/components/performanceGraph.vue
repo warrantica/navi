@@ -7,11 +7,11 @@
     </div>
     <div class="cardHeader">Fund Performance</div>
     <div class="chartControl">
-      <span class="timeControl" @click="updateInterval(1)">1m</span>
-      <span class="timeControl" @click="updateInterval(2)">2m</span>
-      <span class="timeControl" @click="updateInterval(3)">3m</span>
-      <span class="timeControl" @click="updateInterval(6)">6m</span>
-      <span class="timeControl" @click="updateInterval(12)">1y</span>
+      <span class="timeControl" @click="updateInterval(1)" :class="{active: numberOfMonths===1}">1m</span>
+      <span class="timeControl" @click="updateInterval(2)" :class="{active: numberOfMonths===2}">2m</span>
+      <span class="timeControl" @click="updateInterval(3)" :class="{active: numberOfMonths===3}">3m</span>
+      <span class="timeControl" @click="updateInterval(6)" :class="{active: numberOfMonths===6}">6m</span>
+      <span class="timeControl" @click="updateInterval(12)" :class="{active: numberOfMonths===12}">1y</span>
     </div>
     <div class="chartWrapper">
       <canvas id="chart" width="100" height="300"></canvas>
@@ -128,7 +128,23 @@ export default {
 .chartControl{
   margin-bottom: 10px;
   position: absolute;
-  top: 10px; right: 10px;
+  top: 20px; right: 30px;
+  font-size: 0.8rem;
+}
+
+.timeControl{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+  @include transition-normal;
+}
+
+.timeControl.active{
+  background: $primary;
 }
 
 .chartWrapper{
