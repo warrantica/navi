@@ -19,7 +19,7 @@ export default {
           display: true, labelString: 'Return (%)'
         },
         ticks: {
-          callback: (label, i, arr) => i % Math.ceil(arr.length/5) === 0 ? label.toFixed(1) : null
+          callback: (label, i, arr) => i % Math.ceil(arr.length/5) === 0 || label==0 ? label.toFixed(2) : null
         },
         gridLines: { color: 'rgba(255,255,255,0.24)', zeroLineWidth: 2, zeroLineColor: '#FFFFFF' }
       }]
