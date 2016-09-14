@@ -105,10 +105,7 @@ export default {
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: center;
+  @include center-everything;
   background: $grey;
 }
 
@@ -117,24 +114,15 @@ export default {
   height: 60px;
   background: rgba(255, 255, 255, 0.24);
   border-radius: 50%;
-  animation: pulse 1s cubic-bezier(.8, -0.2, 0.2, 1.2) infinite;
-  transition: all .2s ease;
+  animation: pulse 1s $bounce-timing infinite;
+  @include transition-normal;
 }
 
 .loadCircleBig{
   width: 80px;
   height: 80px;
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  justify-content: center;
+  @include center-everything;
   animation-delay: 0.2s;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(0.5); }
-  100% { transform: scale(1); }
 }
 
 .chartControl{
@@ -146,14 +134,5 @@ export default {
 .chartWrapper{
   width: 100%;
   height: 300px;
-}
-
-.fade-transition{
-  transition: all .2s ease;
-  opacity: 1;
-}
-
-.fade-enter, .fade-leave{
-  opacity: 0;
 }
 </style>

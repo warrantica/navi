@@ -1,4 +1,33 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,400,700);
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5); }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+@keyframes pulse {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5); }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+.fade-transition {
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+  opacity: 1; }
+
+.fade-enter, .fade-leave {
+  opacity: 0; }
+
 body, html {
   margin: 0; }
 

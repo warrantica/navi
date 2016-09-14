@@ -58,7 +58,25 @@ $font-weight-bold: 700;
   display: inline-block;
 }
 
-// Animation
-@mixin transition-normal{
-  transition: all .3s ease;
+@mixin center-everything{
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
 }
+
+// Animation and Transition
+$bounce-timing: cubic-bezier(.8, -0.2, 0.2, 1.2);
+
+@mixin transition-normal{
+  transition: all .2s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.5); }
+  100% { transform: scale(1); }
+}
+
+.fade-transition{ @include transition-normal; opacity: 1; }
+.fade-enter, .fade-leave{ opacity: 0; }
