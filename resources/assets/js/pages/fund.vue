@@ -22,7 +22,7 @@ export default {
   methods: {
     updateData(){
       Navi.getNav(this.$route.params.fundname).then(data => this.fundData = data);
-      this.$broadcast('updateChart', [this.$route.params.fundname, 'ktplus']);
+      this.$broadcast('updateChart', [this.$route.params.fundname]);
     },
 
     goToFund(){
