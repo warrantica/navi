@@ -53,12 +53,18 @@ class FundController extends Controller
       $html = new Crawler((string)$request->getBody());
 
       $data = [];
-      $data = $html->filter('tr[bgcolor="#F2F2F2"]')->each(function(Crawler $node, $i){
+      $data = $html->filter('tr[bgcolor="#F2F2F2"]')->each(function(Crawler $node, $i) use ($dateFrom){
+        $x = FundController::dateToCarbon($node->children()->eq(0)->text());
+        if($x->lt($dateFrom)) return false;
         return [
-          'x' => FundController::formatDate($node->children()->eq(0)->text()),
+          'x' => $x->toDateString(),
           'y' => $node->children()->eq(2)->text()
         ];
       });
+
+      //get rid of falsey values in previous statement using default callback
+      //of array_filter - clever eh!
+      $data = array_filter($data);
 
       $result = [];
 
@@ -118,15 +124,17 @@ class FundController extends Controller
     }
 
     private function getLatestDate(){
-      $guzzle = new Client(['base_uri' => 'http://www.thaimutualfund.com']);
-      $request = $guzzle->post('/AIMC/aimc_navCenter.jsp');
-      $html = new Crawler((string)$request->getBody());
+      return Carbon::now()->subDay();
 
-      return Carbon::create(
-        $html->filter('select[name="data_year"] option[selected]')->attr('value') - 543,
-        $html->filter('select[name="data_month"] option[selected]')->attr('value'),
-        $html->filter('select[name="data_date"] option[selected]')->attr('value')
-      );
+      // $guzzle = new Client(['base_uri' => 'http://www.thaimutualfund.com']);
+      // $request = $guzzle->post('/AIMC/aimc_navCenter.jsp');
+      // $html = new Crawler((string)$request->getBody());
+      //
+      // return Carbon::create(
+      //   $html->filter('select[name="data_year"] option[selected]')->attr('value') - 543,
+      //   $html->filter('select[name="data_month"] option[selected]')->attr('value'),
+      //   $html->filter('select[name="data_date"] option[selected]')->attr('value')
+      // );
     }
 
     private function getDateFrom(Carbon $date, $numberOfMonths){
