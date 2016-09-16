@@ -53,14 +53,16 @@ class FundController extends Controller
       $html = new Crawler((string)$request->getBody());
 
       $data = [];
-      $data = $html->filter('tr[bgcolor="#F2F2F2"]')->each(function(Crawler $node, $i) use ($dateFrom){
-        $x = FundController::dateToCarbon($node->children()->eq(0)->text());
-        if($x->lt($dateFrom)) return false;
-        return [
-          'x' => $x->toDateString(),
-          'y' => $node->children()->eq(2)->text()
-        ];
-      });
+      $data = $html->filter('tr[bgcolor="#F2F2F2"]')
+        ->each(function(Crawler $node, $i) use ($dateFrom){
+          $x = FundController::dateToCarbon($node->children()->eq(0)->text());
+          if($x->lt($dateFrom)) return false;
+          return [
+            'x' => $x->toDateString(),
+            'y' => $node->children()->eq(2)->text()
+          ];
+        }
+      );
 
       //get rid of falsey values in previous statement using default callback
       //of array_filter - clever eh!

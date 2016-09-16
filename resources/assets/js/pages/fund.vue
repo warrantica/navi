@@ -10,9 +10,12 @@
       <performance-graph></performance-graph>
     </div>
     <div class="section compareList">
-      <input type="text" v-for="fund in compareTo" track-by="$index" v-model="fund">
-      <button @click="addMoreFundToCompare">+</button>
-      <button @click="updateData">Update</button>
+      <div class="cardHeader">Compare</div>
+      <input type="text" class="compareTextBox" v-for="fund in compareTo"
+             track-by="$index"
+             v-model="fund">
+      <button class="button" @click="addMoreFundToCompare">+</button>
+      <button class="button" @click="updateData">Update</button>
     </div>
   </div>
 </template>
@@ -63,5 +66,21 @@ export default {
   color: $white;
   border-radius: 2px;
   text-transform: uppercase;
+}
+
+.compareTextBox{
+  display: block;
+  padding: 5px 10px;
+  margin: 5px 0;
+  background: $grey;
+  @include grey-border;
+  font: 1rem $main-font;
+  color: $white;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.button{
+  
 }
 </style>
