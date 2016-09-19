@@ -28,11 +28,16 @@ let App = Vue.extend({
   methods: {
     goToFund(){
       this.$router.go({name: 'fund', params: {fundname: this.currentFundName}});
+      this.$broadcast('updateData');
     }
   },
 
   ready(){
 
+  },
+
+  events: {
+    'updateCurrentFundName'(name){ this.currentFundName = name; }
   }
 });
 

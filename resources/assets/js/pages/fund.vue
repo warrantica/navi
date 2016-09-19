@@ -1,12 +1,6 @@
 <template>
   <div class="routerWrapper">
     <div class="section">
-      <input class="nameTextBox"
-             type="text"
-             v-model="currentFundName"
-             @keyup.enter="goToFund">
-    </div>
-    <div class="section">
       <performance-graph></performance-graph>
     </div>
     <div class="section compareList">
@@ -29,15 +23,7 @@ export default {
   }},
 
   methods: {
-    updateData(){
-      Navi.getNav(this.$route.params.fundname).then(data => this.fundData = data);
-      this.$broadcast('updateChart', this.compareTo.concat(this.$route.params.fundname));
-    },
-
-    goToFund(){
-      this.$router.go({name: 'fund', params: {fundname: this.currentFundName}});
-      this.updateData();
-    },
+    updateData(){ this.$emit('updateData'); },
 
     addMoreFundToCompare(){
       this.compareTo.push('');
@@ -46,6 +32,20 @@ export default {
 
   ready(){
     this.updateData();
+  },
+
+  events: {
+    'updateData'(){
+      Navi.getNav(this.$route.params.fundname).then(data => this.fundData = data);
+      this.$broadcast('updateChart', this.compareTo.concat(this.$route.params.fundname));
+    }
+  },
+
+  route: {
+    data(transition){
+      this.$dispatch('updateCurrentFundName', transition.to.params.fundname);
+      transition.next();
+    }
   }
 }
 </script>
@@ -81,6 +81,6 @@ export default {
 }
 
 .button{
-  
+
 }
 </style>

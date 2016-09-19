@@ -27,6 +27,13 @@ export default{
       for(let fund of data) fundNames.push(fund.name);
       this.$broadcast('updateChart', fundNames);
     });
+  },
+
+  route: {
+    data(transition){
+      this.$dispatch('updateCurrentFundName', '');
+      transition.next();
+    }
   }
 }
 </script>
