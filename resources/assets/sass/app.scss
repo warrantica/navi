@@ -6,40 +6,55 @@ body, html{
 }
 
 body{
-  display: flex;
   min-height: 100vh;
-  flex-flow: row nowrap;
-  align-items: stretch;
   font: $font-size-base $main-font;
   line-height: $line-height-base;
   color: $text-color;
   background: $dark-grey;
 }
 
-.sidebar{
-  width: 15vw;
+.header{
+  width: 100%;
+  height: 64px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 20px;
   background: $primary;
+  position: fixed; top: 0; left: 0;
+  z-index: 10;
 }
 
-.sidebar-logo{
+.header-logo{
   color: white;
-  width: 100%;
-  text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
+}
+
+.header-logo, .header-toolbar{
+  width: 30%;
+}
+
+.header-search{
+  flex: 1;
+  font: 1.5rem $main-font;
+  color: $white;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  border: none;
+  text-transform: uppercase;
 }
 
 .content{
-  flex: 1;
+  padding-top: 64px;
 }
 
 .section{
   box-sizing: border-box;
   padding: 10px 20px 0 20px;
   width: 100%;
-}
-
-.section:first-child{
-  padding-top: 0;
 }
 
 .cardHeader{

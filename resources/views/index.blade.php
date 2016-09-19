@@ -13,8 +13,10 @@
   <link rel="stylesheet" href="{{ asset('/css/app.css') }}" >
 </head>
 <body>
-  <div class="sidebar">
-    <div class="sidebar-logo" v-link="'/'">Navi</div>
+  <div class="header">
+    <div class="header-logo" v-link="'/'">Navi</div>
+    <input class="header-search" type="text" v-model="currentFundName" @keyup.enter="goToFund">
+    <div class="header-toolbar"></div>
   </div>
   <div class="content">
     <router-view></router-view>

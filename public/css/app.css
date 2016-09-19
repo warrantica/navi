@@ -32,38 +32,55 @@ body, html {
   margin: 0; }
 
 body {
-  display: -webkit-box;
-  display: flex;
   min-height: 100vh;
-  flex-flow: row nowrap;
-  -webkit-box-align: stretch;
-  align-items: stretch;
   font: 16px "Roboto";
   line-height: 1.5;
   color: #fff;
   background: #212121; }
 
-.sidebar {
-  width: 15vw;
-  background: #303F9F; }
-
-.sidebar-logo {
-  color: white;
+.header {
   width: 100%;
-  text-align: center;
-  font-size: 2rem; }
+  height: 64px;
+  display: -webkit-box;
+  display: flex;
+  flex-flow: row nowrap;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 20px;
+  background: #303F9F;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10; }
+
+.header-logo {
+  color: white;
+  font-size: 1.5rem; }
+
+.header-logo, .header-toolbar {
+  width: 30%; }
+
+.header-search {
+  -webkit-box-flex: 1;
+  flex: 1;
+  font: 1.5rem "Roboto";
+  color: #FFFFFF;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  border: none;
+  text-transform: uppercase; }
 
 .content {
-  -webkit-box-flex: 1;
-  flex: 1; }
+  padding-top: 64px; }
 
 .section {
   box-sizing: border-box;
   padding: 10px 20px 0 20px;
   width: 100%; }
-
-.section:first-child {
-  padding-top: 0; }
 
 .cardHeader {
   font-size: 0.9rem;

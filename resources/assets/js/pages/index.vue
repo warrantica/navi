@@ -2,7 +2,6 @@
   <div class="routerWrapper">
     <div class="section fundCardList">
       <fund-card v-for="fund in fundData" :name="fund.name" :color="fund.color"></fund-card>
-      <div class="fundCard-newButton" v-link="{path:'/fund/add'}">Add new mutual fund</div>
     </div>
 
     <div class="section">

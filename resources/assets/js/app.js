@@ -21,8 +21,14 @@ Vue Instance
 ==============================================================================*/
 
 let App = Vue.extend({
-  methods: {
+  data(){ return {
+    currentFundName: ''
+  }},
 
+  methods: {
+    goToFund(){
+      this.$router.go({name: 'fund', params: {fundname: this.currentFundName}});
+    }
   },
 
   ready(){
