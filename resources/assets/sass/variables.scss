@@ -1,5 +1,6 @@
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,400,700);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
 // Colors
 $primary: #303F9F;
@@ -23,7 +24,16 @@ $font-weight-bold: 700;
 
 
 // Inputs
-
+@mixin textbox{
+  display: block;
+  padding: 5px 10px;
+  margin: 5px 0;
+  background: $grey;
+  @include grey-border;
+  font: 1rem $main-font;
+  color: $white;
+  border-radius: 2px;
+}
 
 // Style Presets
 @mixin elevation-1{
@@ -80,3 +90,20 @@ $bounce-timing: cubic-bezier(.8, -0.2, 0.2, 1.2);
 
 .fade-transition{ @include transition-normal; opacity: 1; }
 .fade-enter, .fade-leave{ opacity: 0; }
+
+// Misc
+.ic, i[ic]{
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}

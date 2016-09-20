@@ -53,30 +53,8 @@ export default {
 <style scoped lang="scss">
 @import "../../sass/variables.scss";
 
-.nameTextBox{
-  display: block;
-  box-sizing: border-box;
-  padding: 10px 20px;
-  margin: 10px 0;
-  background: $grey;
-  @include grey-border;
-  width: 100%;
-  font: 2rem $main-font;
-  font-weight: $font-weight-light;
-  color: $white;
-  border-radius: 2px;
-  text-transform: uppercase;
-}
-
 .compareTextBox{
-  display: block;
-  padding: 5px 10px;
-  margin: 5px 0;
-  background: $grey;
-  @include grey-border;
-  font: 1rem $main-font;
-  color: $white;
-  border-radius: 2px;
+  @include textbox;
   text-transform: uppercase;
 }
 

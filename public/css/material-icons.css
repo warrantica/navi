@@ -1,0 +1,24 @@
+@font-face {
+	font-family: material-icon;
+  font-style: normal;
+  font-weight: 400;
+	src: url('MaterialIcons-Regular.ttf')  format('truetype');
+}
+
+.ic{
+  font-family: material-icon;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  text-rendering: optimizeLegibility;
+	vertical-align: middle;
+	margin-bottom: 5px;
+}

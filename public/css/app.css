@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:100,400,700);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 @-webkit-keyframes pulse {
   0% {
     -webkit-transform: scale(1);
@@ -27,6 +28,21 @@
 
 .fade-enter, .fade-leave {
   opacity: 0; }
+
+.ic, i[ic] {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased; }
 
 body, html {
   margin: 0; }
@@ -82,6 +98,13 @@ body {
 .header-search:focus, .header-search:active {
   outline: none; }
 
+.header-toolbar {
+  display: -webkit-box;
+  display: flex;
+  flex-flow: row nowrap;
+  -webkit-box-pack: end;
+  justify-content: flex-end; }
+
 .content {
   padding-top: 64px; }
 
@@ -95,14 +118,5 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 10px; }
-
-.formInput {
-  display: block;
-  background: #424242;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.5rem;
-  font: "Roboto";
-  color: #FFFFFF; }
 
 /*# sourceMappingURL=app.css.map */

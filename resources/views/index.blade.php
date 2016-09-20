@@ -9,14 +9,15 @@
   <title>Navi</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,600">
   <link rel="stylesheet" href="{{ asset('/css/app.css') }}" >
 </head>
 <body>
   <div class="header">
     <div class="header-logo" v-link="'/'">Navi</div>
     <input class="header-search" type="text" v-model="currentFundName" @keyup.enter="goToFund">
-    <div class="header-toolbar"></div>
+    <div class="header-toolbar">
+      <i ic v-link="'/fund'">list</i>
+    </div>
   </div>
   <div class="content">
     <router-view></router-view>

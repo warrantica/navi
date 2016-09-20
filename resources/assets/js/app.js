@@ -14,6 +14,7 @@ Vue.component('performance-graph', require('./components/performanceGraph.vue'))
 
 import Index from './pages/index.vue';
 import Fund from './pages/fund.vue';
+import FundList from './pages/fundList.vue';
 import FundAdd from './pages/fundAdd.vue';
 
 /*==============================================================================
@@ -52,6 +53,7 @@ router.mode = 'html5';
 router.map({
   '/': { component: Index },
   '/fund/:fundname': { component: Fund, name: 'fund' },
+  '/fund': { component: FundList },
   '/fund/add': { component: FundAdd }
 });
 

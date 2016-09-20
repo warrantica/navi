@@ -46,12 +46,4 @@ export default{
   flex-flow: row;
   align-items: stretch;
 }
-
-.fundCard-newButton{
-  @include style-card;
-  margin: 10px;
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-}
 </style>
