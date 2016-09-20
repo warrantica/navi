@@ -1,17 +1,11 @@
 <template>
   <div class="routerWrapper">
     <div class="section fundList">
-      <div class="cardHeader">Fund list</div>
-      <table>
-        <tr>
-          <th>Name</th>
-        </tr>
-        <tr v-for="fund in funds">
-          <td>
-            {{ fund.name | uppercase }}
-          </td>
-        </tr>
-      </table>
+      <div class="cardHeader">Saved Funds</div>
+      <div class="fundList-item" v-for="fund in funds">
+        <div class="fundList-color" :style="{background:fund.color}"></div>
+        {{ fund.name | uppercase }}
+      </div>
     </div>
   </div>
 </template>
@@ -50,6 +44,23 @@ export default {
 .fundList{
   box-sizing: border-box;
   @include style-card;
-  margin: 20px;
+  display: block;
+  margin: 20px auto;
+  max-width: 500px;
+}
+
+.fundList-item{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.fundList-color{
+  display: inline-block;
+  margin-right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }
 </style>
