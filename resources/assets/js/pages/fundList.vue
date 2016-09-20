@@ -6,6 +6,11 @@
         <div class="fundList-color" :style="{background:fund.color}"></div>
         {{ fund.name | uppercase }}
       </div>
+      <div class="fundList-add">
+        <div class="fundList-color" :style="{background:'#FFF'}"></div>
+        <input class="fundList-name" type="text">
+        <button class="fundList-addButton">Add</button>
+      </div>
     </div>
   </div>
 </template>
@@ -62,5 +67,11 @@ export default {
   width: 32px;
   height: 32px;
   border-radius: 50%;
+}
+
+.fundList-name{
+  @include textbox;
+  background: rgba(255, 255, 255, 0.24);
+  display: inline-block;
 }
 </style>
