@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 
 Route::get('/fund', 'FundController@all')->middleware('api');
 
+Route::post('/fund', 'FundController@add')->middleware('api');
+
 Route::get('/fund/{name}', 'FundController@show')->middleware('api');
 
 Route::get('/history/{name}', 'FundController@history')->middleware('api');

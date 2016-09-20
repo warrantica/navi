@@ -6,11 +6,13 @@
         <div class="fundList-color" :style="{background:fund.color}"></div>
         {{ fund.name | uppercase }}
       </div>
-      <div class="fundList-add">
-        <div class="fundList-color" :style="{background:'#FFF'}"></div>
-        <input class="fundList-name" type="text">
-        <button class="fundList-addButton">Add</button>
-      </div>
+      <form class="fundList-add" method="post" action="/api/fund">
+        <div class="fundList-add-row">
+          <div class="fundList-color" :style="{background:'#FFF'}"></div>
+          <input class="fundList-add-name" name="name" type="text">
+          <button class="fundList-add-button" type="submit">Add</button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -69,7 +71,14 @@ export default {
   border-radius: 50%;
 }
 
-.fundList-name{
+.fundList-add-row{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.fundList-add-name{
   @include textbox;
   background: rgba(255, 255, 255, 0.24);
   display: inline-block;

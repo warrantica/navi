@@ -98,6 +98,14 @@ class FundController extends Controller
       return Fund::all();
     }
 
+    public function add(Request $request){
+      dd($request->name);
+
+      //new up Fund
+
+      //save
+    }
+
     private function fetchFundData($name){
       $date = FundController::getLatestDate();
       $dateFrom = FundController::getDateFrom($date, 1);
