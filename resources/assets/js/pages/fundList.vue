@@ -9,6 +9,7 @@
           <i ic>delete</i>
         </div>
       </div>
+      <div class="cardHeader">Add a New Fund</div>
       <form class="fundList-add" method="post" action="/api/fund">
         <div class="fundList-add-row">
           <div class="fundList-color" :style="{background: addColor}"></div>
