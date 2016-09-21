@@ -8,9 +8,14 @@
       </div>
       <form class="fundList-add" method="post" action="/api/fund">
         <div class="fundList-add-row">
-          <div class="fundList-color" :style="{background:'#FFF'}"></div>
+          <div class="fundList-color" :style="{background: addColor}"></div>
           <input class="fundList-add-name" name="name" type="text">
+          <input type="hidden" name="color" v-model="addColor">
           <button class="fundList-add-button" type="submit">Add</button>
+        </div>
+        <div class="fundList-add-row">
+          <color-select color="#FFFFFF"></color-select>
+          <color-select color="#000000"></color-select>
         </div>
       </form>
     </div>
@@ -20,7 +25,8 @@
 <script>
 export default {
   data(){ return {
-    funds: []
+    funds: [],
+    addColor: '#FFFFFF'
   }},
 
   methods: {
@@ -33,6 +39,10 @@ export default {
   events: {
     'updateData'(){
       Navi.getAllFunds().then(data => this.funds = data);
+    },
+
+    'selectColor'(color){
+      this.addColor = color;
     }
   },
 

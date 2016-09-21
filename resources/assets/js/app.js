@@ -11,6 +11,7 @@ Components
 
 Vue.component('fund-card', require('./components/fundCard.vue'));
 Vue.component('performance-graph', require('./components/performanceGraph.vue'));
+Vue.component('color-select', require('./components/colorSelect.vue'));
 
 import Index from './pages/index.vue';
 import Fund from './pages/fund.vue';

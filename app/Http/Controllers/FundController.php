@@ -101,9 +101,10 @@ class FundController extends Controller
     public function add(Request $request){
       dd($request->name);
 
-      //new up Fund
-
-      //save
+      // $fund = new Fund([
+      //   'name' => $request->name,
+      //   'color' => $request->color
+      // ])->save();
     }
 
     private function fetchFundData($name){
