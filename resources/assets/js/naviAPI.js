@@ -10,6 +10,21 @@ export default {
     });
   },
 
+  addFund(data){
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        type: 'POST',
+        url: '/api/fund',
+        data: data,
+        success: data => {
+          if(data.success) resolve();
+          else reject('addFund() error');
+        },
+        error: (xhr, status, data) => reject(xhr.responseJSON.errors)
+      });
+    });
+  },
+
   getNav(name){
     return new Promise((resolve, reject) => {
       if(!name) reject('Name must not be empty');

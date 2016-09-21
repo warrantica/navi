@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Validator;
+use Illuminate\Http\Response;
 
 use App\Fund;
 
@@ -98,13 +100,29 @@ class FundController extends Controller
       return Fund::all();
     }
 
-    public function add(Request $request){
-      dd($request->name);
+    public function store(Request $request){
+      //dd($request->all());
 
-      // $fund = new Fund([
-      //   'name' => $request->name,
-      //   'color' => $request->color
-      // ])->save();
+      $validator = Validator::make($request->all(), [
+        'name' => 'required|unique:funds',
+        'color' => 'required'
+      ]);
+
+      if($validator->fails()){
+        return response([
+          'success' => false,
+          'errors' => $validator->getMessageBag()->toArray()
+        ], 400);
+      }
+
+      $fund = new Fund([
+        'name' => $request->name,
+        'color' => $request->color
+      ]);
+
+      $fund->save();
+
+      return ['success' => 'true'];
     }
 
     private function fetchFundData($name){
