@@ -96,7 +96,13 @@ export default {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  margin: 10px 0;
+  padding: 10px 0;
+  background: rgba(255, 255, 255, 0);
+  @include transition-normal;
+}
+
+.fundList-item:hover{
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .fundList-color{
