@@ -63,11 +63,12 @@ export default {
     });
   },
 
-  getHistoricalChartData(name, numberOfMonths){
+  getHistoricalChartData(name, numberOfMonths, useRawNav = false){
     return new Promise((resolve, reject) => {
       $.ajax({
         type: 'GET',
-        url: '/api/chart/' + name + '/' + numberOfMonths,
+        url: '/api/chart/' + name,
+        data: { numberOfMonths, useRawNav },
         success: data => resolve(data),
         error: () => reject('getHistoricalChartData() for ' + name + ' error')
       });

@@ -7,11 +7,14 @@
       </div>
     </div>
     <div class="chartControl">
-      <span class="timeControl" @click="updateInterval(1)" :class="{active: numberOfMonths===1}">1m</span>
-      <span class="timeControl" @click="updateInterval(2)" :class="{active: numberOfMonths===2}">2m</span>
-      <span class="timeControl" @click="updateInterval(3)" :class="{active: numberOfMonths===3}">3m</span>
-      <span class="timeControl" @click="updateInterval(6)" :class="{active: numberOfMonths===6}">6m</span>
-      <span class="timeControl" @click="updateInterval(12)" :class="{active: numberOfMonths===12}">1y</span>
+      <div class="controlSelect" @click="updateMode(false)" :class="{active: useRawNav===false}">Return</div>
+      <div class="controlSelect" @click="updateMode(true)" :class="{active: useRawNav===true}">NAV</div>
+      <div class="separator">|</div>
+      <div class="controlSelect" @click="updateInterval(1)" :class="{active: numberOfMonths===1}">1m</div>
+      <div class="controlSelect" @click="updateInterval(2)" :class="{active: numberOfMonths===2}">2m</div>
+      <div class="controlSelect" @click="updateInterval(3)" :class="{active: numberOfMonths===3}">3m</div>
+      <div class="controlSelect" @click="updateInterval(6)" :class="{active: numberOfMonths===6}">6m</div>
+      <div class="controlSelect" @click="updateInterval(12)" :class="{active: numberOfMonths===12}">1y</div>
     </div>
     <div class="chartWrapper">
       <canvas id="chart" width="100" height="300"></canvas>
@@ -27,6 +30,7 @@ export default {
   data() { return {
     isLoading: false,
     funds: [],
+    useRawNav: false,
     numberOfMonths: 1,
     chart: {},
     chartObject: {},
@@ -37,6 +41,11 @@ export default {
   methods: {
     updateInterval(interval){
       this.numberOfMonths = interval;
+      this.$emit('updateChart', this.funds);
+    },
+
+    updateMode(mode){
+      this.useRawNav = mode;
       this.$emit('updateChart', this.funds);
     }
   },
@@ -61,7 +70,11 @@ export default {
       let promises = [];
       for(let fund of funds){
         if(fund === '') continue;
-        promises.push(Navi.getHistoricalChartData(fund, this.numberOfMonths));
+        promises.push(Navi.getHistoricalChartData(
+          fund,
+          this.numberOfMonths,
+          this.useRawNav
+        ));
       }
 
       this.isLoading = true;
@@ -76,6 +89,9 @@ export default {
             fill: false, tension: 0
           });
         }
+
+        this.chartOptions.scales.yAxes[0].scaleLabel.labelString = this.useRawNav
+          ? 'NAV (THB)' : 'Return (%)';
 
         this.chart.destroy();
         this.chart = new Chart(this.chartObject, {
@@ -133,20 +149,25 @@ export default {
   font-size: 0.8rem;
 }
 
-.timeControl{
+.controlSelect{
   display: inline-block;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  border-radius: 50%;
+  padding: 2px 5px;
+  border: 2px rgba(0, 0, 0, 0) solid;
+  border-radius: 2px;
+  box-sizing: border-box;
   cursor: pointer;
   @include transition-normal;
 }
 
-.timeControl.active{
-  background: $accent;
+.controlSelect.active{
+  border: 2px $accent solid;
 }
+
+.separator{
+  display: inline-block;
+  margin: 0 10px;
+}
+
 
 .chartWrapper{
   width: 100%;

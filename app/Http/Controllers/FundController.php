@@ -38,12 +38,14 @@ class FundController extends Controller
       }
     }
 
-    public function chart($name, $numberOfMonths){
+    public function chart($name, Request $request){
+      $useRawNav = $request->useRawNav === 'true';
+
       $date = FundController::getLatestDate();
-      $dateFrom = FundController::getDateFrom($date, $numberOfMonths);
+      $dateFrom = FundController::getDateFrom($date, $request->numberOfMonths);
 
       $guzzle = new Client(['base_uri' => 'http://www.thaimutualfund.com']);
-      $request = $guzzle->post('/AIMC/aimc_navSearchResult.jsp',['form_params'=>[
+      $guzzleRequest = $guzzle->post('/AIMC/aimc_navSearchResult.jsp',['form_params'=>[
         'searchType' => 'oldFund',
         'abbrName' => $name,
         'data_month' => $dateFrom->month,
@@ -52,7 +54,7 @@ class FundController extends Controller
         'data_year2' => $date->year + 543
       ]]);
 
-      $html = new Crawler((string)$request->getBody());
+      $html = new Crawler((string)$guzzleRequest->getBody());
 
       $data = [];
       $data = $html->filter('tr[bgcolor="#F2F2F2"]')
@@ -72,12 +74,13 @@ class FundController extends Controller
 
       $result = [];
 
-      $result[] = ['x' => $data[count($data)-1]['x'], 'y' => '0'];
       $baseNav = $data[count($data)-1]['y'];
+      $initialY = $useRawNav ? $baseNav : '0';
+      $result[] = ['x' => $data[count($data)-1]['x'], 'y' => $initialY];
       for($i=count($data)-2; $i>=0; --$i){
         $result[] = [
           'x' => $data[$i]['x'],
-          'y' => (($data[$i]['y']/$baseNav) - 1) * 100
+          'y' => $useRawNav ? $data[$i]['y'] : (($data[$i]['y']/$baseNav) - 1) * 100
         ];
       }
 

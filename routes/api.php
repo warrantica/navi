@@ -23,4 +23,4 @@ Route::get('/fund/{name}', 'FundController@show')->middleware('api');
 
 Route::get('/history/{name}', 'FundController@history')->middleware('api');
 
-Route::get('/chart/{name}/{months}', 'FundController@chart')->middleware('api');
+Route::get('/chart/{name}', 'FundController@chart')->middleware('api');
