@@ -76,5 +76,8 @@ body{
   font-size: 0.9rem;
   font-weight: $font-weight-bold;
   text-transform: uppercase;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
+
+.cardHeader:first-child{ margin-top: 0; }

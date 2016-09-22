@@ -12,6 +12,7 @@
     <div class="fundCard-date">
       From {{ dateFrom }} to {{ dateTo }}
     </div>
+    <div class="outset" :style="{borderColor:color}"></div>
   </div>
 </template>
 
@@ -62,8 +63,10 @@ export default {
 
 .fundCard{
   @include style-card;
+  border: none;
   color: white;
   margin: 10px;
+  position: relative;
   cursor: pointer;
 }
 
@@ -87,5 +90,18 @@ export default {
 
 .fundCard-nav, .fundCard-date{
   font-size: 0.7rem;
+}
+
+.outset{
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
+  @include transition-fast;
+}
+
+.fundCard:hover .outset{
+  top: -4px; right: -4px; bottom: -4px; left: -4px;
 }
 </style>

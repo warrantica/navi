@@ -1,6 +1,6 @@
 <template>
   <div class="routerWrapper">
-    <div class="section">
+    <div class="graph section">
       <performance-graph></performance-graph>
     </div>
     <div class="section compareList">
@@ -53,12 +53,12 @@ export default {
 <style scoped lang="scss">
 @import "../../sass/variables.scss";
 
+.graph{
+  margin-top: 10px;
+}
+
 .compareTextBox{
   @include textbox;
   text-transform: uppercase;
-}
-
-.button{
-
 }
 </style>
