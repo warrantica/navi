@@ -1,11 +1,11 @@
 <template>
   <div class="chartContainer">
+    <div class="cardHeader">Fund Performance</div>
     <div class="loader" v-show="isLoading" transition="fade">
       <div class="loadCircle loadCircleBig">
         <div class="loadCircle loadCircleSmall"></div>
       </div>
     </div>
-    <div class="cardHeader">Fund Performance</div>
     <div class="chartControl">
       <span class="timeControl" @click="updateInterval(1)" :class="{active: numberOfMonths===1}">1m</span>
       <span class="timeControl" @click="updateInterval(2)" :class="{active: numberOfMonths===2}">2m</span>
