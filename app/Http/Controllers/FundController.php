@@ -125,6 +125,20 @@ class FundController extends Controller
       return ['success' => 'true'];
     }
 
+    public function destroy($name){
+      $fund = Fund::where('name', $name)->first();
+
+      if($fund !== null){
+        $fund->delete();
+        return [ 'success' => true ];
+      }
+
+      return [
+        'success' => false,
+        'errors' => [$name . ' not found.']
+      ];
+    }
+
     private function fetchFundData($name){
       $date = FundController::getLatestDate();
       $dateFrom = FundController::getDateFrom($date, 1);

@@ -56,6 +56,12 @@ export default {
 
     deleteFund(name){
       console.log("delete " + name);
+      Navi.deleteFund(name).then(data => {
+        console.log(data);
+        this.$emit('updateData');
+      }).catch(reason => {
+        console.log('deleteFund() error: ' + JSON.stringify(reason));
+      });
     }
   },
 

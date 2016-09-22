@@ -17,6 +17,8 @@ Route::get('/fund', 'FundController@all')->middleware('api');
 
 Route::post('/fund', 'FundController@store')->middleware('api');
 
+Route::delete('/fund/{name}', 'FundController@destroy')->middleware('api');
+
 Route::get('/fund/{name}', 'FundController@show')->middleware('api');
 
 Route::get('/history/{name}', 'FundController@history')->middleware('api');

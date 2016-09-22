@@ -25,6 +25,21 @@ export default {
     });
   },
 
+  deleteFund(name){
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        type: 'POST',
+        url: '/api/fund/' + name,
+        data: { _method: 'delete' },
+        success: data => {
+          if(data.success) resolve(data);
+          else reject('deleteFund() error');
+        },
+        error: (xhr, status, data) => reject(xhr.responseJSON.errors)
+      });
+    });
+  },
+
   getNav(name){
     return new Promise((resolve, reject) => {
       if(!name) reject('Name must not be empty');
