@@ -145,7 +145,7 @@ export default {
 }
 
 .timeControl.active{
-  background: $primary;
+  background: $accent;
 }
 
 .chartWrapper{

@@ -15,7 +15,7 @@
           <div class="fundList-color" :style="{background: addColor}"></div>
           <input class="fundList-add-name" name="name" type="text">
           <input type="hidden" name="color" v-model="addColor">
-          <button class="fundList-add-button" type="submit" @click.prevent="addFund">Add</button>
+          <button class="fundList-add-button button" type="submit" @click.prevent="addFund">Add</button>
         </div>
         <div class="fundList-add-row">
           <color-select color="#E91E63"></color-select><!--  pink -->

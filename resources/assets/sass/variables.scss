@@ -4,7 +4,7 @@
 
 // Colors
 $primary: #303F9F;
-$accent: #FFEB3B;
+$accent: #F57C00;
 $white: #FFFFFF;
 $light-grey: #424242;
 $grey: #303030;
@@ -19,21 +19,6 @@ $text-color: #fff;
 $font-weight-normal: 400;
 $font-weight-light: 100;
 $font-weight-bold: 700;
-
-// Buttons
-
-
-// Inputs
-@mixin textbox{
-  display: block;
-  padding: 5px 10px;
-  margin: 5px 0;
-  background: $grey;
-  @include grey-border;
-  font: 1rem $main-font;
-  color: $white;
-  border-radius: 2px;
-}
 
 // Style Presets
 @mixin elevation-1{
@@ -78,9 +63,8 @@ $font-weight-bold: 700;
 // Animation and Transition
 $bounce-timing: cubic-bezier(.8, -0.2, 0.2, 1.2);
 
-@mixin transition-normal{
-  transition: all .2s ease;
-}
+@mixin transition-normal{ transition: all .2s ease; }
+@mixin transition-fast{ transition: all .1s ease; }
 
 @keyframes pulse {
   0% { transform: scale(1); }
@@ -90,6 +74,53 @@ $bounce-timing: cubic-bezier(.8, -0.2, 0.2, 1.2);
 
 .fade-transition{ @include transition-normal; opacity: 1; }
 .fade-enter, .fade-leave{ opacity: 0; }
+
+// Buttons
+.button{
+  display: inline-block;
+  background: $accent;
+  border: none;
+  border-radius: 2px;
+  margin: 0 10px;
+  padding: 5px 15px;
+  font: 0.9rem $main-font;
+  text-transform: uppercase;
+  color: $white;
+  position: relative;
+}
+
+.button:focus{
+  outline: none;
+}
+
+.button:after{
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  border: 1px $accent solid;
+  border-radius: 3px;
+  @include transition-fast;
+}
+
+.button:hover:after, .button:focus:after{
+  top: -3px; right: -3px; bottom: -3px; left: -3px;
+}
+
+.button:active:after{
+  top: -2px; right: -2px; bottom: -2px; left: -2px;
+}
+
+// Inputs
+@mixin textbox{
+  display: block;
+  padding: 5px 10px;
+  margin: 5px 0;
+  background: $grey;
+  @include grey-border;
+  font: 1rem $main-font;
+  color: $white;
+  border-radius: 2px;
+}
 
 // Misc
 .ic, i[ic]{
