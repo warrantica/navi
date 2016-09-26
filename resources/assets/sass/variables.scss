@@ -110,6 +110,10 @@ $bounce-timing: cubic-bezier(.8, -0.2, 0.2, 1.2);
   top: -2px; right: -2px; bottom: -2px; left: -2px;
 }
 
+.button:first-child{
+  margin-left: 0;
+}
+
 // Inputs
 @mixin textbox{
   display: block;

@@ -30,6 +30,17 @@ body{
 .header-logo{
   color: white;
   font-size: 1.5rem;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo{
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
 }
 
 .header-logo, .header-toolbar{
@@ -60,6 +71,10 @@ body{
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;
+}
+
+.toolbarIcon{
+  cursor: pointer;
 }
 
 .content{

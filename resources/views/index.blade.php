@@ -13,10 +13,12 @@
 </head>
 <body>
   <div class="header">
-    <div class="header-logo" v-link="'/'">Navi</div>
+    <div class="header-logo" v-link="'/'">
+      <img class="logo" src="/img/logo.png" alt="Navi" />Navi
+    </div>
     <input class="header-search" type="text" v-model="currentFundName" @keyup.enter="goToFund">
     <div class="header-toolbar">
-      <i ic v-link="'/fund'">list</i>
+      <i ic class="toolbarIcon" v-link="'/fund'">list</i>
     </div>
   </div>
   <div class="content">
